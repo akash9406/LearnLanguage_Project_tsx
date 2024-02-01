@@ -1,15 +1,18 @@
 import { AccountCircle } from "@mui/icons-material"
 import { Box, Button, Container, InputAdornment,  TextField } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <Container sx={{
       display: "flex",
       justifyContent:"center",
       alignItems: "center",
-      minHeight: "70vh"
+      minHeight: "70vh",
     }}>
-      <Box sx={{
+      <Box 
+      sx={{
         display: "flex",
         flexDirection:"column",
         minHeight: "40vh",
@@ -19,8 +22,9 @@ const Login = () => {
         boxSizing: "border-box",
         border: "4px solid #C38D9E",
         borderRadius: "5px",
-        width: "40vw"
-      }}>
+        minWidth: "40vw"
+      }}  
+      >
         <TextField
         id="input-with-icon-textfield"
         label="Username"
@@ -40,6 +44,9 @@ const Login = () => {
       />
       <Button variant="contained">
         Login
+      </Button>
+      <Button onClick={()=>{navigate("/signup")}} variant="outlined">
+        SignUp
       </Button>
       </Box>
     </Container>
