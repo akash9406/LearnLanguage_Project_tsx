@@ -3,6 +3,7 @@ import "./App.css"
 import Header from './components/Header'
 import {Suspense, lazy} from 'react'
 import Loader from './components/Loader';
+import { Toaster } from "react-hot-toast";
 const Signup = lazy(()=> import('./components/Signup'))
 const Home = lazy(()=> import('./components/Home'));
 const Learning = lazy(()=>import("./components/Learning"))
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='/signup' element={<Signup/>} />
       </Routes>
       </Suspense>
+      <Toaster/>
     </Router>
   )
 }

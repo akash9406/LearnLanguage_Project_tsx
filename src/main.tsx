@@ -6,6 +6,7 @@ import { ThemeProvider } from '@emotion/react'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.ts'
 
+export const server = "http://localhost:8080/api/user"
 const theme = createTheme({
   palette:{
     primary:{

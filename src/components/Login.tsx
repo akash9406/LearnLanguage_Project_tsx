@@ -1,10 +1,19 @@
 import { AccountCircle } from "@mui/icons-material"
 import { Box, Button, Container, InputAdornment,  TextField } from "@mui/material"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-  const navigate = useNavigate()
-  return (
+   const navigate = useNavigate()
+   const [email,setEmail] = useState<String>('')
+   const [password,setPassword] = useState<String>('')
+
+   const LoginHandler = async(e:React.FormEvent<HTMLFormElement>) => {
+       e.preventDefault()
+       console.log(email)
+       console.log(password)        
+   } 
+   return (
     <Container sx={{
       display: "flex",
       justifyContent:"center",
@@ -12,6 +21,8 @@ const Login = () => {
       minHeight: "70vh",
     }}>
       <Box 
+        component="form"
+        onSubmit={LoginHandler}
       sx={{
         display: "flex",
         flexDirection:"column",
@@ -27,8 +38,10 @@ const Login = () => {
       >
         <TextField
         id="input-with-icon-textfield"
-        label="Username"
+        label="Email"
         variant="standard"
+        value={email}
+        onChange={(e)=>{setEmail(e.target.value)}}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -40,9 +53,13 @@ const Login = () => {
        <TextField
         id="input-with-icon-textfield"
         label="Password"
+        value={password}
+        onChange={(e)=>{setPassword(e.target.value)}}
         variant="standard"
       />
-      <Button variant="contained">
+      <Button
+        type="submit"
+      variant="contained">
         Login
       </Button>
       <Button onClick={()=>{navigate("/signup")}} variant="outlined">

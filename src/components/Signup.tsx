@@ -1,6 +1,69 @@
 import { Avatar, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography } from "@mui/material"
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Cookie from 'js-cookie';
+import React, { useState } from "react";
+import { server } from "../main";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { DoneLogin } from "../redux/userSlice";
 const Signup = () => {
+    
+  const [firstname,setFirstname] = useState<String>('')
+  const [lastname,setLastname] = useState<String>('')
+  const [email,setEmail] = useState<String>('')
+  const [password,setPassword] = useState<String>('')
+  const dispatch =  useDispatch()
+  const  {Authenticated} = useSelector((state: {Users:Userinterface})=>state.Users)
+   
+  const submitHandler =  async(e:React.FormEvent<HTMLFormElement>) => {
+         e.preventDefault();
+         try {
+           const data = await axios.post(
+            `${server}/signup`,
+            {
+              firstName: firstname,
+              lastName: lastname,
+              email,
+              password,
+            },{
+              headers:{
+              "Content-Type":"application/json",
+              }
+            }
+           )
+           //setting up cookie
+           const token = data.data.token;
+           Cookie.set('token',token,{
+             expires: 1,
+            secure:true
+           })
+
+           toast.success(data.data.message)
+           //updating redux
+           dispatch(DoneLogin())
+         } 
+         catch (err: unknown) {
+          if(err instanceof AxiosError){
+            if(err.response){
+         
+              toast.error(err.response.data.message)
+            }
+            else{
+              toast.error("unkown axios error")
+            }
+          }
+          else{
+              toast.error("something went wrong")
+              console.log(err)
+          }
+           
+         }
+  }
+
+  if (Authenticated) return <Navigate to={"/"} />;
+
   return (
     <Container sx={{
       height: "80vh",
@@ -24,12 +87,15 @@ const Signup = () => {
               sx={{
                 mt: 3
               }}
+              onSubmit={submitHandler}
            >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                  <TextField
                   autoComplete="given-name"
                   name="firstName"
+                  value={firstname}
+                  onChange={(e)=> {setFirstname(e.target.value)}}
                   required
                   fullWidth
                   id="firstName"
@@ -42,6 +108,8 @@ const Signup = () => {
                   fullWidth
                   id="lastName"
                   label="Last Name"
+                  value={lastname}
+                  onChange={(e) => {setLastname(e.target.value)}}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -52,6 +120,8 @@ const Signup = () => {
                   fullWidth
                   id="email"
                   label="Email Address"
+                  value={email}
+                  onChange={(e) => {setEmail(e.target.value)}}
                   name="email"
                   autoComplete="email"
                 />
@@ -62,6 +132,8 @@ const Signup = () => {
                   fullWidth
                   id="password"
                   label="Password"
+                  value={password}
+                  onChange={(e) => {setPassword(e.target.value)}}
                   type="password"
                   name="password"
                   autoComplete="new-password"

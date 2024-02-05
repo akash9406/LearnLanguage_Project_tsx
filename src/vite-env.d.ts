@@ -20,3 +20,14 @@ type FetchedDataType = {
     text: string;
   }[]
 }
+
+ type usertype = {
+     firstName: String,
+     LastName: String,
+     email: String,
+ }
+
+interface Userinterface {
+    Authenticated: boolean,
+    User: usertype,
+}
