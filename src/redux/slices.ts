@@ -12,6 +12,9 @@ const  rootSlice = createSlice({
     getWordsRequest:(state) => {
       state.loading  = true;
     },
+    DoneLoading:(state)=>{
+      state.loading = false;
+    },
     getWordSuccess:(state,action:PayloadAction<WordType[]>)=> {
       state.loading = false;
       state.words = action.payload;
@@ -34,5 +37,5 @@ const  rootSlice = createSlice({
   },
 })
 
- export const {getWordSuccess,getWordsRequest,getWordFail,clearState,saveResult} = rootSlice.actions
+ export const {getWordSuccess,getWordsRequest,getWordFail,clearState,saveResult,DoneLoading} = rootSlice.actions
 export default rootSlice.reducer;
