@@ -1,6 +1,6 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { NotLogin, removeUser } from "../redux/userSlice";
 import toast from "react-hot-toast";
@@ -18,13 +18,14 @@ const Header = () => {
   const { Authenticated } = useSelector(
     (state: { Users: Userinterface }) => state.Users
   );
-
+  const navigate = useNavigate();
   const Logouthandler = () => {
     try {
       dispatch(NotLogin());
       dispatch(removeUser());
       Cookies.remove("token");
       toast.success("logout done");
+      navigate("/");
       ///have to make logout function
       //https://www.geeksforgeeks.org/how-to-create-a-ripple-effect-on-click-the-button/
     } catch (error) {
