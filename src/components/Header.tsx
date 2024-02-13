@@ -2,11 +2,8 @@ import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { DoneLogin, NotLogin, removeUser, setUser } from "../redux/userSlice";
+import { NotLogin, removeUser } from "../redux/userSlice";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
-import axios from "axios";
-import { server } from "../main";
 
 const styles = {
   color: "white",
@@ -21,22 +18,6 @@ const Header = () => {
   const { Authenticated } = useSelector(
     (state: { Users: Userinterface }) => state.Users
   );
-
-  useEffect(() => {
-    axios
-      .get(`${server}/me`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch(DoneLogin());
-        dispatch(setUser(res.data.user));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(NotLogin());
-        dispatch(removeUser());
-      });
-  }, [Authenticated]);
 
   const Logouthandler = () => {
     try {
@@ -59,6 +40,11 @@ const Header = () => {
         <Link style={styles} to={"/"}>
           Home
         </Link>
+        {Authenticated && (
+          <Link style={styles} to={"/profile"}>
+            Profile
+          </Link>
+        )}
         {Authenticated ? (
           <Button
             variant="outlined"

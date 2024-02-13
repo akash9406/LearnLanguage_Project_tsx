@@ -4,9 +4,10 @@ const initialState: Userinterface = {
      Authenticated: false,
      User: {  
        firstName: '',
-       LastName: '',
+       lastName: '',
        email: '',
      },
+     languageData: ""
 }
 
 const  userSlice  = createSlice({
@@ -25,14 +26,17 @@ const  userSlice  = createSlice({
        removeUser: (state)=> {
            state.User = {
                firstName: "",
-               LastName: "",
+               lastName: "",
                email:"",
            }
-       }
+       },
+       storeLang: (state,action:PayloadAction<String>) => {
+             state.languageData = action.payload
+       } 
      }
 })
 
-     export const {NotLogin,DoneLogin,setUser,removeUser} = userSlice.actions
+     export const {NotLogin,DoneLogin,setUser,removeUser,storeLang} = userSlice.actions
 
     export default userSlice.reducer;
     

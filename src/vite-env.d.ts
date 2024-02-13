@@ -23,11 +23,13 @@ type FetchedDataType = {
 
  type usertype = {
      firstName: String,
-     LastName: String,
+     lastName: String,
      email: String,
  }
+
 
 interface Userinterface {
     Authenticated: boolean,
     User: usertype,
+    languageData: String,
 }
