@@ -38,7 +38,7 @@ const Profile = () => {
     async function fetchData() {
       try {
         const data = await axios.get(
-          "http://localhost:8080/api/data/storedata",
+          "https://learnlanguage-backend.onrender.com/api/data/storedata",
           {
             withCredentials: true,
           }

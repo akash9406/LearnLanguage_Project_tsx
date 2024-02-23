@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 
 export const server = "http://localhost:8080/api/user";
+export const server2 = "https://learnlanguage-backend.onrender.com/api/user";
+
 const theme = createTheme({
   palette: {
     primary: {

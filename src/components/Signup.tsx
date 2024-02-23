@@ -13,7 +13,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Cookie from "js-cookie";
 import React, { useState } from "react";
-import { server } from "../main";
+import { server, server2 } from "../main";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const data = await axios.post(
-        `${server}/signup`,
+        `${server2}/signup`,
         {
           firstName: firstname,
           lastName: lastname,
@@ -49,8 +49,9 @@ const Signup = () => {
       //setting up cookie
       const token = data.data.token;
       Cookie.set("token", token, {
-        expires: 1,
-        secure: true,
+        expires: 1, // Cookie expiration time in days
+        secure: true, // Set to true in production
+        sameSite: "None", // Set to 'None' for cross-origin requests if using HTTPS
       });
 
       toast.success(data.data.message);

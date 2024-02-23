@@ -29,7 +29,7 @@ const Result = () => {
     async function pushdata() {
       try {
         await axios.post(
-          "http://localhost:8080/api/data/storedata",
+          "https://learnlanguage-backend.onrender.com/api/data/storedata",
           {
             Language: languageData,
             correctAns: correctAns,

@@ -9,7 +9,7 @@ import {
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { server } from "../main";
+import { server, server2 } from "../main";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Cookie from "js-cookie";
@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await axios.post(
-        `${server}/login`,
+        `${server2}/login`,
         {
           email,
           password,
@@ -41,8 +41,9 @@ const Login = () => {
       //setting up cookie
       const token = data.data.token;
       Cookie.set("token", token, {
-        expires: 1,
-        secure: true,
+        expires: 1, // Cookie expiration time in days
+        secure: true, // Set to true in production
+        sameSite: "None", // Set to 'None' for cross-origin requests if using HTTPS
       });
 
       toast.success(data.data.message);
