@@ -5,7 +5,7 @@ import { Suspense, lazy, useEffect } from "react";
 import Loader from "./components/Loader";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { server, server2 } from "./main";
+import { server2 } from "./main";
 import { DoneLogin, NotLogin, removeUser, setUser } from "./redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 const Signup = lazy(() => import("./components/Signup"));

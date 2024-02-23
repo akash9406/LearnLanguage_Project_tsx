@@ -9,7 +9,7 @@ import {
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { server, server2 } from "../main";
+import { server2 } from "../main";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Cookie from "js-cookie";

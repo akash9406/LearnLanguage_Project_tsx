@@ -13,7 +13,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Cookie from "js-cookie";
 import React, { useState } from "react";
-import { server, server2 } from "../main";
+import { server2 } from "../main";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
