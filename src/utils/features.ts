@@ -1,7 +1,7 @@
 import axios from "axios";
 import { generate } from "random-words";
 import _ from "lodash";
-
+import 'rxjs/add/operator/map'
 const generateMCQ = (meaning:{Text:string}[],
   idx:number 
   ): string[] => {
