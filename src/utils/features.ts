@@ -1,7 +1,6 @@
 import axios from "axios";
 import { generate } from "random-words";
 import _ from "lodash";
-import 'rxjs/add/operator/map'
 const generateMCQ = (meaning:{Text:string}[],
   idx:number 
   ): string[] => {
@@ -48,7 +47,10 @@ export const translateWords = async (params: LangType) : Promise<WordType[]> => 
       }
     );
 
-    const receive: FetchedDataType[] = response.data
+    const receive: FetchedDataType[] = Array.isArray(response.data)
+  ? response.data
+  : [{ translations: { text: response.data } }];
+
   
    const arr: WordType[] = receive.map((i,idx)=>{
 
